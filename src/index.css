@@ -5,9 +5,44 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.ant-upload.ant-upload-select-picture-card{
+  width: 72px;
+  height: 72px;
+}
+.ant-upload-list-picture-card .ant-upload-list-item{
+  width: 72px;
+  height: 72px;
+}
+.ant-form-item{
+  margin-bottom: 0;
+}
+.ant-upload-list{
+  border: 1px solid #e6e6e6;
+  height: 180px;
+  overflow: scroll;
+  margin-top: 15px;
+}
+/*.ant-upload-list-picture .ant-upload-list-item, .ant-upload-list-picture-card .ant-upload-list-item{*/
+  /*height: 30px;*/
+/*}*/
+/*.upload-list-inline .ant-upload-list-item {*/
+  /*float: left;*/
+  /*width: 200px;*/
+  /*margin-right: 8px;*/
+/*}*/
+/*.ant-menu-horizontal > .ant-menu-item:hover {*/
+  /*color: #1890ff;*/
+  /*border-bottom: 2px solid transparent;*/
+/*}*/
+/*.ant-menu-horizontal > .ant-menu-item-selected{*/
+  /*color: #1890ff;*/
+  /*border-bottom: 2px solid #1890ff;*/
+/*}*/
