@@ -36,6 +36,17 @@ function formatTimeStampToHourTime(timestamp) {
     return hour + ":" + minute;
 }
 
+function formatTimeStampToHourSecondTime(timestamp) {
+    if (timestamp == null) {
+        return '';
+    }
+    let date = new Date(timestamp);
+    let hour = ("0" + date.getHours()).slice(-2).toString();
+    let minute = ("0" + date.getMinutes()).slice(-2).toString();
+    let seconds = ("0" + date.getSeconds()).slice(-2).toString();
+    return hour + ":" + minute + ":" +seconds;
+}
+
 function formatTimeStampToDateHour(timestamp) {
     if (timestamp == null) {
         return '';
@@ -60,5 +71,5 @@ function formatTimeStampToMonth(timestamp) {
 }
 
 export const timeUtil = {
-    formatTimeStampToDate, formatTimeStampToDateTime, formatTimeStampToHourTime,formatTimeStampToMonth,formatTimeStampToDateHour
+    formatTimeStampToDate, formatTimeStampToDateTime, formatTimeStampToHourTime,formatTimeStampToMonth,formatTimeStampToDateHour,formatTimeStampToHourSecondTime
 }

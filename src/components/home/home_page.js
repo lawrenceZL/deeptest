@@ -16,9 +16,9 @@ class HomePage extends Component{
     }
 
     componentDidMount(){
-        csvservice.getData('','','','').then(response=>{
-            console.log(response)
-        })
+        // csvservice.getData('','','','').then(response=>{
+        //     console.log(response)
+        // })
     }
 
     process_file = files => {
@@ -38,13 +38,13 @@ class HomePage extends Component{
                     <Header style={{color:'white',textAlign:'center'}}>deeptest</Header>
                     <Layout>
                         <Sider style={{backgroundColor:'white',overflow:'scroll'}} width={300}><MySider/></Sider>
-                        <Content style={{padding:'200px 20px',display:'flex',flex:1}}>
+                        <Content style={{padding:'20px 20px',display:'flex',flex:1}}>
                             <div style={{flex:1}}>
                                 <LineChart/>
                             </div>
-                            <div style={{flex:1.5}}>
-                                <BarChart/>
-                            </div>
+                            {/*<div style={{flex:1.5}}>*/}
+                                {/*<BarChart/>*/}
+                            {/*</div>*/}
 
                         </Content>
                     </Layout>
