@@ -1,0 +1,22 @@
+import connect from "react-redux/es/connect/connect";
+import LineChart from '../../components/charts/lineChart';
+import {
+    storeLine
+} from "../../actions/deeptest.action";
+
+//映射Redux state到组件的属性
+function mapStateToProps(state) {
+    return {
+        lineData:state.deeptest_reducer.lineData,
+        lineDataY:state.deeptest_reducer.lineDataY,
+    }
+}
+
+//映射Redux actions到组件的属性
+function mapDispatchToProps(dispatch){
+    return{
+        storeLine:(lineData,lineDataY)=>dispatch(storeLine(lineData,lineDataY)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LineChart);

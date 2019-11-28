@@ -3,6 +3,7 @@ import {Button, Form, Input, Select, Upload, Icon, Menu, Empty} from 'antd';
 import {timeUtil} from "../../utils/timeUtil";
 import CanvasPanel from './canvasPanel'
 import './Canvas.css'
+import {csvservice} from "../../service/csv_service";
 
 const {Option} = Select;
 
@@ -17,6 +18,7 @@ class MySider extends Component {
         this.sampleTypeChange = this.sampleTypeChange.bind(this);
         this.imageSelect = this.imageSelect.bind(this);
         this.modelTypeChange = this.modelTypeChange.bind(this);
+        this.runClick = this.runClick.bind(this);
     }
 
     componentDidMount() {
@@ -46,6 +48,29 @@ class MySider extends Component {
 
     imageSelect(e) {
         window.open(e.thumbUrl)
+    }
+
+    runClick(e){
+        this.getLineData();
+    }
+
+    getLineData(){
+        csvservice.getData('','','','').then(response=>{
+            if(response.responseCode==="RESPONSE_OK"){
+                console.log(response.data.data)
+                let data = response.data.data;
+                // let xData=[];
+                let yData=[];
+                for(let i=1;i<data.length;i++){
+                    // xData.push(timeUtil.formatTimeStampToHourSecondTime(data[i][5]))
+                    let arr = []
+                    arr.push(new Date(data[i][5]))
+                    arr.push(i)
+                    yData.push(arr)
+                }
+                this.props.storeLine(data,yData)
+            }
+        })
     }
 
     render() {
@@ -144,7 +169,7 @@ class MySider extends Component {
                         {time}
                     </div>
                     <div style={{flex: 1}}>
-                        <Button style={{height: '40px', float: 'right', borderRadius: '0'}} type="primary">run</Button>
+                        <Button style={{height: '40px', float: 'right', borderRadius: '0'}} type="primary" onClick={this.runClick}>run</Button>
                     </div>
                 </div>
                 <div style={{padding: '60px 20px'}}>
