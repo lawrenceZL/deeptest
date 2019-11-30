@@ -1,7 +1,7 @@
 import connect from "react-redux/es/connect/connect";
 import Sider from '../../components/sider/sider';
 import {
-    changeFramwork, changeOperator, changeGenerate, storeLine
+    changeFramwork, changeOperator, changeGenerate, storeLine,changeType
 } from "../../actions/deeptest.action";
 
 //映射Redux state到组件的属性
@@ -20,6 +20,7 @@ function mapDispatchToProps(dispatch){
         changeOperator:(operator)=>dispatch(changeOperator(operator)),
         changeGenerate:(generate)=>dispatch(changeGenerate(generate)),
         storeLine:(lineData,lineDataY)=>dispatch(storeLine(lineData,lineDataY)),
+        changeType:(index)=>dispatch(changeType(index)),
     }
 }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Route} from 'react-router-dom'
-import HomePage from '../components/home/home_page'
+import HomePage from '../containers/home/home_page'
 
 function App() {
     return (

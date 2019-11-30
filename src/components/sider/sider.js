@@ -51,6 +51,7 @@ class MySider extends Component {
     }
 
     runClick(e){
+        this.props.changeType(-1)
         this.getLineData();
     }
 
@@ -68,6 +69,9 @@ class MySider extends Component {
                     arr.push(i)
                     yData.push(arr)
                 }
+                setTimeout(()=>{
+                    this.props.changeType(1)
+                },5000)
                 this.props.storeLine(data,yData)
             }
         })

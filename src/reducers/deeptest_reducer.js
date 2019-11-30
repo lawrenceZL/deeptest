@@ -1,5 +1,6 @@
-import {FRAMWORK_CHANGE,GENERATE_CHANGE,OPERATOR_CHANGE,RUN_CLICK,STORE_LINEDATA} from '../actions/deeptest.action'
+import {FRAMWORK_CHANGE,GENERATE_CHANGE,OPERATOR_CHANGE,RUN_CLICK,STORE_LINEDATA,TYPE_CHANGE} from '../actions/deeptest.action'
 const initialState={
+    index:0,
     framwork:['caffe'],
     operator:'operator2',
     generate:'generate1',
@@ -31,6 +32,11 @@ const deeptest_reducer = (state = initialState , action )=>{
             return Object.assign({},state,{
                 lineData:action.lineData,
                 lineDataY:action.lineDataY,
+            })
+        }
+        case TYPE_CHANGE:{
+            return Object.assign({},state,{
+                index:action.index
             })
         }
         default:

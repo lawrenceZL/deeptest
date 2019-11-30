@@ -3,6 +3,7 @@ export const OPERATOR_CHANGE="OPERATOR_CHANGE";
 export const GENERATE_CHANGE="GENERATE_CHANGE";
 export const RUN_CLICK = "RUN_CLICK";
 export const STORE_LINEDATA = "STORE_LINEDATA";
+export const TYPE_CHANGE="TYPE_CHANGE"
 
 export function changeFramwork(framwork) {
     return {
@@ -35,5 +36,11 @@ export function storeLine(lineData,lineDataY) {
         type:STORE_LINEDATA,
         lineData:lineData,
         lineDataY:lineDataY,
+    }
+}
+export function changeType(index) {
+    return {
+        type:TYPE_CHANGE,
+        index:index
     }
 }
