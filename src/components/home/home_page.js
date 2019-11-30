@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
 import {withRouter} from 'react-router-dom'
-import {Layout, Empty, Spin, Alert, Radio} from 'antd';
+import {Layout, Empty, Spin, Alert, Radio,Modal,Slider} from 'antd';
 import MySider from '../../containers/sider/sider'
 import LineChart from '../../containers/charts/lineChart'
 import BarChart from '../charts/barChart'
+import PrecisionChart from '../charts/precisionChart'
 import {csvservice} from "../../service/csv_service";
 
 
@@ -16,6 +17,7 @@ class HomePage extends Component {
         this.state = {
             data: [],
             yData: [],
+            visible:false
         }
     }
 
@@ -78,13 +80,24 @@ class HomePage extends Component {
                             </div>
                             }
                             {this.props.index !== -1 && this.props.index !== 0 &&
-                            <Radio.Group value={2} buttonStyle="solid" style={{position:'absolute',right:40,top:90}}
-                                         // onChange={(e)=>{this.props.changeType(e.target.value);console.log(e.target.value)}}
-                            >
-                                <Radio.Button value={1}>line chart</Radio.Button>
-                                <Radio.Button value={2}>bar chart</Radio.Button>
-                                <Radio.Button value={3}>precision</Radio.Button>
-                            </Radio.Group>
+                                <div style={{position:'absolute',right:40,top:90,zIndex:100}}>
+                                    <Radio.Group defaultValue={this.props.index} buttonStyle="solid"
+                                         onChange={(e)=>{
+                                             this.props.changeType(e.target.value)
+                                             if(e.target.value===3){
+                                                 this.setState({
+                                                     visible:true
+                                                 })
+                                             }else {
+                                                 this.props.showPrecision(false)
+                                             }
+                                         }}
+                                    >
+                                        <Radio.Button value={1}>line chart</Radio.Button>
+                                        <Radio.Button value={2}>bar chart</Radio.Button>
+                                        <Radio.Button value={3}>precision</Radio.Button>
+                                    </Radio.Group>
+                                </div>
                             }
                             {this.props.index === 1 &&
                             <div style={{flex: 1}}>
@@ -96,6 +109,23 @@ class HomePage extends Component {
                                 <BarChart/>
                             </div>
                             }
+                            {this.props.index === 3 &&this.props.precision_show&&
+                            <div style={{flex: 1}}>
+                                <PrecisionChart/>
+                            </div>
+                            }
+                            <Modal
+                                title="min-max-precision-select"
+                                visible={this.state.visible}
+                                onOk={()=>{this.setState({
+                                    visible:false
+                                });this.props.showPrecision(true)}}
+                                onCancel={()=>{this.setState({
+                                    visible:false
+                                })}}
+                            >
+                                <Slider range defaultValue={[8, 64]} />
+                            </Modal>
                         </Content>
                     </Layout>
                 </Layout>

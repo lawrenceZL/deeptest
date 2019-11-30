@@ -3,7 +3,8 @@ export const OPERATOR_CHANGE="OPERATOR_CHANGE";
 export const GENERATE_CHANGE="GENERATE_CHANGE";
 export const RUN_CLICK = "RUN_CLICK";
 export const STORE_LINEDATA = "STORE_LINEDATA";
-export const TYPE_CHANGE="TYPE_CHANGE"
+export const TYPE_CHANGE="TYPE_CHANGE";
+export const PRECISION_SHOW="PRECISION_SHOW";
 
 export function changeFramwork(framwork) {
     return {
@@ -42,5 +43,11 @@ export function changeType(index) {
     return {
         type:TYPE_CHANGE,
         index:index
+    }
+}
+export function showPrecision(precision_show) {
+    return {
+        type:PRECISION_SHOW,
+        precision_show:precision_show
     }
 }
