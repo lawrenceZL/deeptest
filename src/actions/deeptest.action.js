@@ -5,6 +5,7 @@ export const RUN_CLICK = "RUN_CLICK";
 export const STORE_LINEDATA = "STORE_LINEDATA";
 export const TYPE_CHANGE="TYPE_CHANGE";
 export const PRECISION_SHOW="PRECISION_SHOW";
+export const FILE_CHANGE = "FILE_CHANGE";
 
 export function changeFramwork(framwork) {
     return {
@@ -49,5 +50,11 @@ export function showPrecision(precision_show) {
     return {
         type:PRECISION_SHOW,
         precision_show:precision_show
+    }
+}
+export function changeFile(fileList) {
+    return {
+        type:FILE_CHANGE,
+        fileList:fileList
     }
 }

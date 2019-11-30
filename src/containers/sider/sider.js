@@ -1,7 +1,7 @@
 import connect from "react-redux/es/connect/connect";
 import Sider from '../../components/sider/sider';
 import {
-    changeFramwork, changeOperator, changeGenerate, storeLine,changeType
+    changeFramwork, changeOperator, changeGenerate, storeLine, changeType, changeFile, showPrecision
 } from "../../actions/deeptest.action";
 
 //映射Redux state到组件的属性
@@ -10,6 +10,9 @@ function mapStateToProps(state) {
         framwork:state.deeptest_reducer.framwork,
         operator:state.deeptest_reducer.operator,
         generate:state.deeptest_reducer.generate,
+        fileList:state.deeptest_reducer.fileList,
+        index:state.deeptest_reducer.index,
+        precision_show:state.deeptest_reducer.precision_show,
     }
 }
 
@@ -21,6 +24,8 @@ function mapDispatchToProps(dispatch){
         changeGenerate:(generate)=>dispatch(changeGenerate(generate)),
         storeLine:(lineData,lineDataY)=>dispatch(storeLine(lineData,lineDataY)),
         changeType:(index)=>dispatch(changeType(index)),
+        changeFile:(fileList)=>dispatch(changeFile(fileList)),
+        showPrecision:(precision_show)=>dispatch(showPrecision(precision_show))
     }
 }
 

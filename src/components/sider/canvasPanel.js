@@ -1,8 +1,16 @@
 import React,{Component} from "react";
 import Draw from "../../utils/draw";
+import {Button,Result} from 'antd'
 import "./Canvas.css";
 
 class CanvasPanel extends Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            result_show:"hidden"
+        }
+    }
     /* 重置功能 */
     reset() {
         Draw.clear();
@@ -15,7 +23,19 @@ class CanvasPanel extends Component {
         if(exportImg === -1) {
             return console.log('please draw!');
         }
-        this.refs['imgC'].src = exportImg;
+        let fileList = this.props.fileList;
+        let item = {
+            uid: exportImg.toString().slice(0,20)+Math.random(),
+            name: exportImg.toString().slice(0,100)+Math.random(),
+            status: 'done',
+            thumbUrl: exportImg,
+        }
+        fileList.push(item)
+        this.props.changeFile(fileList)
+        this.setState({
+            result_show:'show'
+        })
+        // this.refs['imgC'].src = exportImg;
     }
 
     render() {
@@ -23,10 +43,22 @@ class CanvasPanel extends Component {
             <div className="component-canvas">
                 <div className="canvas-wrap" ref='canvas-wrap'></div>
                 <div className="button-wrap">
-                    <span onClick={this.reset}>reset</span>
-                    <span onClick={this.exp.bind(this)}>export</span>
+                    <span onClick={this.reset} style={{float:'left'}}><Button>cancel</Button></span>
+                    <span onClick={this.exp.bind(this)} style={{float:'right'}}><Button type="primary">generate</Button></span>
                 </div>
-                <img ref="imgC" />
+                <Result
+                    className={this.state.result_show}
+                    status="success"
+                    title="generate successfully"
+                    // subTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait."
+                    // extra={[
+                    //     <Button type="primary" key="console">
+                    //         Go Console
+                    //     </Button>,
+                    //     <Button key="buy">Buy Again</Button>,
+                    // ]}
+                />
+                {/*<img ref="imgC" />*/}
             </div>
         );
     }

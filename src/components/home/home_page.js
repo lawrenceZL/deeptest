@@ -79,52 +79,47 @@ class HomePage extends Component {
                                 <Empty/>
                             </div>
                             }
-                            {this.props.index !== -1 && this.props.index !== 0 &&
-                                <div style={{position:'absolute',right:40,top:90,zIndex:100}}>
-                                    <Radio.Group defaultValue={this.props.index} buttonStyle="solid"
-                                         onChange={(e)=>{
-                                             this.props.changeType(e.target.value)
-                                             if(e.target.value===3){
-                                                 this.setState({
-                                                     visible:true
-                                                 })
-                                             }else {
-                                                 this.props.showPrecision(false)
-                                             }
-                                         }}
-                                    >
-                                        <Radio.Button value={1}>line chart</Radio.Button>
-                                        <Radio.Button value={2}>bar chart</Radio.Button>
-                                        <Radio.Button value={3}>precision</Radio.Button>
-                                    </Radio.Group>
-                                </div>
-                            }
+                            {/*{this.props.index !== -1 && this.props.index !== 0 &&*/}
+                                {/*<div style={{position:'absolute',right:40,top:90,zIndex:100}}>*/}
+                                    {/*<Radio.Group defaultValue={this.props.index} buttonStyle="solid"*/}
+                                         {/*onChange={(e)=>{*/}
+                                             {/*this.props.changeType(e.target.value)*/}
+                                             {/*if(e.target.value===3){*/}
+                                                 {/*this.setState({*/}
+                                                     {/*visible:true*/}
+                                                 {/*})*/}
+                                             {/*}else {*/}
+                                                 {/*this.props.showPrecision(false)*/}
+                                             {/*}*/}
+                                         {/*}}*/}
+                                    {/*>*/}
+                                        {/*<Radio.Button value={1}>line chart</Radio.Button>*/}
+                                        {/*<Radio.Button value={2}>bar chart</Radio.Button>*/}
+                                        {/*<Radio.Button value={3}>precision</Radio.Button>*/}
+                                    {/*</Radio.Group>*/}
+                                {/*</div>*/}
+                            {/*}*/}
                             {this.props.index === 1 &&
-                            <div style={{flex: 1}}>
-                                <LineChart/>
-                            </div>
+                                <div style={{display:'flex',justifyContent:'center',alignItem:'center'}}>
+                                    <div style={{flex: 1,width:'1000px'}}>
+                                        <LineChart/>
+                                    </div>
+                                    <div style={{flex: 1,marginTop:'100px',width:'300px'}}>
+                                        <BarChart/>
+                                    </div>
+                                </div>
                             }
                             {this.props.index === 2 &&
                             <div style={{flex: 1, marginTop: 100}}>
                                 <BarChart/>
                             </div>
                             }
-                            {this.props.index === 3 &&this.props.precision_show&&
-                            <div style={{flex: 1}}>
-                                <PrecisionChart/>
-                            </div>
-                            }
-                            <Modal
-                                title="min-max-precision-select"
-                                visible={this.state.visible}
-                                onOk={()=>{this.setState({
-                                    visible:false
-                                });this.props.showPrecision(true)}}
-                                onCancel={()=>{this.setState({
-                                    visible:false
-                                })}}
-                            >
-                                <Slider range defaultValue={[8, 64]} />
+                            <Modal visible={this.props.precision_show} footer={null} width={900} onCancel={()=>{
+                                this.props.showPrecision(false)
+                            }}>
+                                <div style={{flex: 1}}>
+                                    <PrecisionChart/>
+                                </div>
                             </Modal>
                         </Content>
                     </Layout>

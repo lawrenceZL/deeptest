@@ -18,11 +18,10 @@ class BarChart extends Component{
                 formatter: "crash_style_type <br/>{b} : {c} ({d}%)"
             },
             legend: {
-                orient: 'vertical',
-                top: 'middle',
-                bottom: 10,
-                right:180,
-                // left: 100,
+                // orient: 'vertical',
+                // top: 'middle',
+                bottom: 0,
+                left: 'center',
                 data: ['crash_style_1', 'crash_style_2','crash_style_3','crash_style_4','crash_style_5','crash_style_6','crash_style_7','crash_style_8']
             },
             series : [
@@ -53,7 +52,7 @@ class BarChart extends Component{
         };
         return (
             <div>
-                <ReactEcharts option={option} style={{height:'550px'}}/>
+                <ReactEcharts option={option} style={{height:'450px'}}/>
             </div>
         )
     }

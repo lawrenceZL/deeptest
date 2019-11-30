@@ -26,10 +26,31 @@ code {
 }
 .ant-upload-list{
   border: 1px solid #e6e6e6;
-  height: 180px;
+  height: 200px;
   overflow: scroll;
   margin-top: 15px;
 }
+.ant-upload-list-picture .ant-upload-list-item-error, .ant-upload-list-picture-card .ant-upload-list-item-error {
+  border-color: #1890ff;
+}
+.ant-tooltip-content{
+  display: none;
+}
+.ant-upload-list-item-error, .ant-upload-list-item-error .anticon-paper-clip, .ant-upload-list-item-error .ant-upload-list-item-name{
+  color: #1890ff;
+}
+.ant-result-icon > .anticon{
+  font-size: 50px;
+}
+.ant-result-icon{
+  margin-bottom: 10px;
+}
+.ant-result-title{
+  font-size: 18px;
+}
+/*.ant-upload-list-picture .ant-upload-list-item.active{*/
+    /*background: red;*/
+/*}*/
 /*.ant-upload-list-picture .ant-upload-list-item, .ant-upload-list-picture-card .ant-upload-list-item{*/
   /*height: 30px;*/
 /*}*/
