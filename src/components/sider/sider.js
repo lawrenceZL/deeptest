@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import {Button, Form, Input, Select, Upload, Icon, Menu, Empty, Slider, Modal,InputNumber} from 'antd';
+import {Button, Form, Input, Select, Upload, Icon, Menu, Empty, Slider, Modal,InputNumber,Popover} from 'antd';
 import {timeUtil} from "../../utils/timeUtil";
 import CanvasPanel from '../../containers/sider/canvasPanel'
 import './Canvas.css'
 import {csvservice} from "../../service/csv_service";
+import PrecisionChart from "../charts/precisionChart";
 
 const {Option} = Select;
 
@@ -81,13 +82,15 @@ class MySider extends Component {
     render() {
         let {time} = this.state;
         const run_style = {
-            height: '40px',
+            height: '45px',
             backgroundColor: 'white',
             boxShadow: "0px 10px 5px #cccccc",
             display: 'flex',
             position: 'fixed',
-            width: 300,
-            zIndex:100
+            width: 320,
+            zIndex:100,
+            justifyContent:'center',
+            alignItems:'center'
         }
         const props2 = {
             action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
@@ -163,27 +166,31 @@ class MySider extends Component {
             <div>
                 <div style={run_style}>
                     <div style={{flex: 3, display: 'flex', alignItems: 'center', paddingLeft: '20px'}}>
-                        {time}
+                        Operation
                     </div>
-                    <div style={{flex: 1}}>
-                        <Button style={{height: '40px', float: 'right', borderRadius: '0'}} type="primary" onClick={this.runClick}>run</Button>
+                    <div style={{flex: 1,display:'flex'}}>
+                        <Button type="primary" onClick={this.runClick}>run</Button>
                     </div>
                 </div>
-                <div style={{padding: '60px 20px'}}>
+                <div style={{padding: '60px 20px 20px 20px'}}>
                     <Form>
                         <Form.Item
-                            label="framework select"
+                            label="framework"
                         >
-                            <Select mode="multiple" defaultValue={this.props.framwork} onChange={(e)=>{this.props.changeFramwork(e)}}>
-                                <Option value="tensorflow">tensorflow</Option>
-                                <Option value="pytorch">pytorch</Option>
-                                <Option value="caffe">caffe</Option>
-                            </Select>
+                            Select different frameworks from the list to run the operators
+                            <Popover content='We currently only provided the three generally used frameworks' title="Framework Select">
+                                <Select placeholder="framework" mode="multiple" defaultValue={this.props.framwork} onChange={(e)=>{this.props.changeFramwork(e)}}>
+                                    <Option value="tensorflow">tensorflow</Option>
+                                    <Option value="pytorch">pytorch</Option>
+                                    <Option value="caffe">caffe</Option>
+                                </Select>
+                            </Popover>
                         </Form.Item>
                         <Form.Item
-                            label="operator select"
+                            label="operator"
                         >
-                            <Select defaultValue={this.props.operator} onChange={(e)=>{this.props.changeOperator(e)}}>
+                            Select operators should be test from the list to run the input
+                            <Select placeholder="operator" onChange={(e)=>{this.props.changeOperator(e)}}>
                                 <Option value="conv2d">conv2d</Option>
                                 <Option value="conv2d(with padding)">conv2d(with padding)</Option>
                                 <Option value="max_pooling">max_pooling</Option>
@@ -194,11 +201,14 @@ class MySider extends Component {
                             </Select>
                         </Form.Item>
                         {this.props.index!==-1&&this.props.index!==0&&
-                        <Button  style={{marginTop:'20px',marginBottom:'10px'}} onClick={()=>{
-                            this.setState({
-                            visible:true
-                        })
-                        }}>precision testing</Button>
+                        <Form.Item>
+                            Complete precision testing with selected framework and operator. Click to set precision range
+                            <Button  style={{marginTop:'10px',marginBottom:'10px'}} onClick={()=>{
+                                this.setState({
+                                    visible:true
+                                })
+                            }}>precision testing</Button>
+                        </Form.Item>
                         }
                         <Form.Item
                             label="sample"
@@ -206,7 +216,7 @@ class MySider extends Component {
                             <Menu mode="horizontal" selectedKeys={[this.state.modelTypeSelect]}
                                   onClick={this.modelTypeChange}>
                                 <Menu.Item key="upload">
-                                    upload
+                                    image
                                 </Menu.Item>
                                 <Menu.Item key="sketchpad">
                                     sketchpad
@@ -214,7 +224,7 @@ class MySider extends Component {
                             </Menu>
                             {this.state.modelTypeSelect === "upload" &&
                             <div>
-                                <div>upload the images to run the model</div>
+                                <div>You can upload the images to test the operators. Click to select the image</div>
                                 <Upload {...props2} onChange={(e)=>{
                                     console.log(e)
                                     this.props.changeFile(e.fileList)
@@ -247,10 +257,16 @@ class MySider extends Component {
                         {this.state.modelTypeSelect!=="sketchpad"&&
                             <div>
                                 <Form.Item>
+                                    You can select an image from the sample list and choose an adversarial attack algorithm from the algorithm list to generate mutated image
                                     <div style={{display:'flex',marginTop:'15px'}}>
-                                        <Select defaultValue={this.props.generate} style={{marginRight:'15px'}} onChange={(e)=>{this.props.changeGenerate(e)}}>
-                                            <Option value="generate1">generate1</Option>
-                                            <Option value="generate2">generate2</Option>
+                                        <Select placeholder="mutation operators" style={{marginRight:'15px'}} onChange={(e)=>{this.props.changeGenerate(e)}}>
+                                            <Option value="byte-change">byte-change</Option>
+                                            <Option value="bit-change">bit-change</Option>
+                                            <Option value="white-noise">white-noise</Option>
+                                            <Option value="scale">scale</Option>
+                                            <Option value="precision">precision</Option>
+                                            <Option value="triangular-matrix">triangular-matrix</Option>
+                                            <Option value="kernel_matrix">kernel_matrix</Option>
                                         </Select>
                                         <Button onClick={()=>{
                                             let fileList = this.props.fileList;
@@ -312,18 +328,31 @@ class MySider extends Component {
 
                 </div>
                 <Modal
-                    title="min-max-precision-select"
+                    title="Precision setting(You can set the min and max precision you want to test)"
                     visible={this.state.visible}
                     onOk={()=>{this.setState({
-                        visible:false
+                        // visible:false
                     });this.props.showPrecision(true)}}
                     onCancel={()=>{this.setState({
                         visible:false
                     })}}
+                    width={900}
                 >
                     {/*<Slider range defaultValue={[8, 64]} tooltipVisible={true} />*/}
-                    min-precision:&nbsp;<InputNumber min={1} max={50} defaultValue={8} />&nbsp;
-                    max-precision:&nbsp;<InputNumber min={51} max={100} defaultValue={64} />
+                    <div style={{display:'flex',justifyContent:'center'}}>
+                        <div style={{flex:1,display:'flex',justifyContent:'center'}}>
+                            min-precision:&nbsp;<InputNumber min={1} max={50} defaultValue={8} />&nbsp;
+                        </div>
+                        <div style={{flex:1,display:'flex',justifyContent:'center'}}>
+                            max-precision:&nbsp;<InputNumber min={51} max={100} defaultValue={64} />
+                        </div>
+                    </div>
+
+                    {this.props.precision_show&&
+                    <div style={{flex: 1}}>
+                        <PrecisionChart/>
+                    </div>
+                    }
                 </Modal>
             </div>
         )

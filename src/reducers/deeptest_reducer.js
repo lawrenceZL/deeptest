@@ -12,7 +12,7 @@ const initialState={
     index:0,
     framwork:[],
     operator:'',
-    generate:'generate1',
+    generate:'',
     lineData:[],
     lineYData:[],
     precision_show: false,

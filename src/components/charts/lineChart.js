@@ -18,12 +18,41 @@ class LineChart extends Component{
         // console.log(this.state.yData)
         let that = this;
         let option = {
+            title: {
+                text: 'The sketch diagram of Crash sum',
+                // subtext: 'data',
+                left: 'center'
+            },
             xAxis: {
                 type: 'time',
+                name:'time',
+                axisLine:{
+                    symbol:['none', 'arrow']
+                }
                 // data: this.state.xData
             },
             yAxis: {
-                type: 'value'
+                type: 'value',
+                name:'sum',
+                axisLine:{
+                    symbol:['none', 'arrow']
+                }
+            },
+            legend: {
+                type: 'plain',          // 普通图例
+                orient: 'horizontal',   // 水平
+                left:450,               // 左距离
+                top: 60,                // 上距离
+                bottom: 20,             // 下距离
+                width:300,              // 宽度
+                itemGap: 20,            // 间隔
+                itemWidth: 24,          // 图形宽度。
+                itemHeight: 24,         // 图形高度。
+                // data: data.legendData,  // 数据
+                // selected: data.selected,// true为可选
+                formatter: function (name) {
+                    console.log(name)
+                }
             },
             series: [{
                 data: this.props.lineDataY,
@@ -52,9 +81,8 @@ class LineChart extends Component{
                         max:${item[2]}</br>
                         mean:${item[3]}</br>
                         norm:${item[4]}</br>
-                        time:${item[5]}</br>
+                        <!--time:${item[5]}</br>-->
                     `
-
                 }
             },
             dataZoom: [
@@ -76,7 +104,7 @@ class LineChart extends Component{
 
         return(
             <div>
-                <ReactEcharts style={{height:'600px'}} option={option}/>
+                <ReactEcharts style={{height:'550px'}} option={option}/>
             </div>
         )
     }

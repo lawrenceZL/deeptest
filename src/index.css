@@ -48,6 +48,12 @@ code {
 .ant-result-title{
   font-size: 18px;
 }
+.ant-form-item-label > label::after{
+  content: '';
+}
+.ant-form-item-control{
+  line-height: 25px;
+}
 /*.ant-upload-list-picture .ant-upload-list-item.active{*/
     /*background: red;*/
 /*}*/

@@ -59,7 +59,7 @@ class PrecisionChart extends Component{
 
         return(
             <div>
-                <ReactEcharts style={{height:'600px'}} option={option}/>
+                <ReactEcharts style={{height:'500px'}} option={option}/>
             </div>
         )
     }

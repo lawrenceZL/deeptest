@@ -35,6 +35,11 @@ class CanvasPanel extends Component {
         this.setState({
             result_show:'show'
         })
+        setTimeout(()=>{
+            this.setState({
+                result_show:'hidden'
+            })
+        },2000)
         // this.refs['imgC'].src = exportImg;
     }
 

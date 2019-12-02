@@ -9,8 +9,8 @@ class BarChart extends Component{
     render(){
         let option = {
             title: {
-                text: 'crash_style',
-                subtext: 'data',
+                text: 'The plot diagram of Crash category',
+                // subtext: 'data',
                 left: 'center'
             },
             tooltip : {

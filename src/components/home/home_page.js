@@ -65,10 +65,10 @@ class HomePage extends Component {
         return (
             <div>
                 <Layout style={{position: 'absolute', height: '100%', width: '100%'}}>
-                    <Header style={{color: 'white', textAlign: 'center'}}>deeptest</Header>
+                    <Header style={{color: 'white', textAlign: 'center'}}>DeepStable</Header>
                     <Layout>
-                        <Sider style={{backgroundColor: 'white', overflow: 'scroll'}} width={300}><MySider/></Sider>
-                        <Content style={{padding: '20px 20px', display: 'flex', flex: 1, justifyContent: 'center'}}>
+                        <Sider style={{backgroundColor: 'white', overflow: 'scroll'}} width={320}><MySider/></Sider>
+                        <Content style={{padding: '40px 20px', display: 'flex', flex: 1, justifyContent: 'center'}}>
                             {this.props.index === -1 &&
                             <Spin tip="Loading..." style={{marginTop: 200}} size="large">
 
@@ -101,10 +101,10 @@ class HomePage extends Component {
                             {/*}*/}
                             {this.props.index === 1 &&
                                 <div style={{display:'flex',justifyContent:'center',alignItem:'center'}}>
-                                    <div style={{flex: 1,width:'1000px'}}>
+                                    <div style={{flex: 1,width:'800px'}}>
                                         <LineChart/>
                                     </div>
-                                    <div style={{flex: 1,marginTop:'100px',width:'300px'}}>
+                                    <div style={{flex: 1,marginTop:'40px',width:'300px'}}>
                                         <BarChart/>
                                     </div>
                                 </div>
@@ -114,13 +114,13 @@ class HomePage extends Component {
                                 <BarChart/>
                             </div>
                             }
-                            <Modal visible={this.props.precision_show} footer={null} width={900} onCancel={()=>{
-                                this.props.showPrecision(false)
-                            }}>
-                                <div style={{flex: 1}}>
-                                    <PrecisionChart/>
-                                </div>
-                            </Modal>
+                            {/*<Modal visible={this.props.precision_show} footer={null} width={900} onCancel={()=>{*/}
+                                {/*this.props.showPrecision(false)*/}
+                            {/*}}>*/}
+                                {/*<div style={{flex: 1}}>*/}
+                                    {/*<PrecisionChart/>*/}
+                                {/*</div>*/}
+                            {/*</Modal>*/}
                         </Content>
                     </Layout>
                 </Layout>
