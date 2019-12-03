@@ -38,22 +38,6 @@ class LineChart extends Component{
                     symbol:['none', 'arrow']
                 }
             },
-            legend: {
-                type: 'plain',          // 普通图例
-                orient: 'horizontal',   // 水平
-                left:450,               // 左距离
-                top: 60,                // 上距离
-                bottom: 20,             // 下距离
-                width:300,              // 宽度
-                itemGap: 20,            // 间隔
-                itemWidth: 24,          // 图形宽度。
-                itemHeight: 24,         // 图形高度。
-                // data: data.legendData,  // 数据
-                // selected: data.selected,// true为可选
-                formatter: function (name) {
-                    console.log(name)
-                }
-            },
             series: [{
                 data: this.props.lineDataY,
                 type: 'line',
@@ -78,9 +62,9 @@ class LineChart extends Component{
                     let item = that.props.lineData[params[0].data[1]]
                     // console.log(item)
                     return `
-                        max:${item[2]}</br>
-                        mean:${item[3]}</br>
-                        norm:${item[4]}</br>
+                        <span style="color:#ff8080">max:${item[2]}</span></br>
+                        <span style="color:#99bbff">mean:${item[3]}</span></br>
+                        <span style="color:#ffd480">normal:${item[4]}</span></br>
                         <!--time:${item[5]}</br>-->
                     `
                 }
@@ -105,6 +89,32 @@ class LineChart extends Component{
         return(
             <div>
                 <ReactEcharts style={{height:'550px'}} option={option}/>
+                <div style={{display:'flex',justifyContent:'center'}}>
+                    <div style={{flex:1,display:'flex',justifyContent:'flex-end',height:20}}>
+                        <div style={{width:22,height:15,background:'#ff8080',borderRadius:'4px'}}>
+
+                        </div>
+                        <div style={{lineHeight:'15px',marginLeft:'4px'}}>
+                            max
+                        </div>
+                    </div>
+                    <div style={{flex:1,display:'flex',justifyContent:'center',height:20}}>
+                        <div style={{width:22,height:15,background:'#99bbff',borderRadius:'4px'}}>
+
+                        </div>
+                        <div style={{lineHeight:'15px',marginLeft:'4px'}}>
+                            mean
+                        </div>
+                    </div>
+                    <div style={{flex:1,display:'flex',justifyContent:'flex-start',height:20}}>
+                        <div style={{width:22,height:15,background:'#ffd480',borderRadius:'4px'}}>
+
+                        </div>
+                        <div style={{lineHeight:'15px',marginLeft:'4px'}}>
+                            normal
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }

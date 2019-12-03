@@ -104,13 +104,13 @@ class HomePage extends Component {
                                     <div style={{flex: 1,width:'800px'}}>
                                         <LineChart/>
                                     </div>
-                                    <div style={{flex: 1,marginTop:'40px',width:'300px'}}>
+                                    <div style={{flex: 1,width:'300px'}}>
                                         <BarChart/>
                                     </div>
                                 </div>
                             }
                             {this.props.index === 2 &&
-                            <div style={{flex: 1, marginTop: 100}}>
+                            <div style={{flex: 1}}>
                                 <BarChart/>
                             </div>
                             }

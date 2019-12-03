@@ -177,7 +177,7 @@ class MySider extends Component {
                         <Form.Item
                             label="framework"
                         >
-                            Select different frameworks from the list to run the operators
+                            Select different frameworks from the list to run the operators.
                             <Popover content='We currently only provided the three generally used frameworks' title="Framework Select">
                                 <Select placeholder="framework" mode="multiple" defaultValue={this.props.framwork} onChange={(e)=>{this.props.changeFramwork(e)}}>
                                     <Option value="tensorflow">tensorflow</Option>
@@ -189,7 +189,7 @@ class MySider extends Component {
                         <Form.Item
                             label="operator"
                         >
-                            Select operators should be test from the list to run the input
+                            Select operators should be test from the list to run the input.
                             <Select placeholder="operator" onChange={(e)=>{this.props.changeOperator(e)}}>
                                 <Option value="conv2d">conv2d</Option>
                                 <Option value="conv2d(with padding)">conv2d(with padding)</Option>
@@ -202,7 +202,7 @@ class MySider extends Component {
                         </Form.Item>
                         {this.props.index!==-1&&this.props.index!==0&&
                         <Form.Item>
-                            Complete precision testing with selected framework and operator. Click to set precision range
+                            Complete precision testing with selected framework and operator. Click to set precision range.<br/>
                             <Button  style={{marginTop:'10px',marginBottom:'10px'}} onClick={()=>{
                                 this.setState({
                                     visible:true
@@ -224,7 +224,7 @@ class MySider extends Component {
                             </Menu>
                             {this.state.modelTypeSelect === "upload" &&
                             <div>
-                                <div>You can upload the images to test the operators. Click to select the image</div>
+                                <div>You can upload the images to test the operators. Click to select the image.</div>
                                 <Upload {...props2} onChange={(e)=>{
                                     console.log(e)
                                     this.props.changeFile(e.fileList)
@@ -257,7 +257,7 @@ class MySider extends Component {
                         {this.state.modelTypeSelect!=="sketchpad"&&
                             <div>
                                 <Form.Item>
-                                    You can select an image from the sample list and choose an adversarial attack algorithm from the algorithm list to generate mutated image
+                                    You can select an image from the sample list and choose an adversarial attack algorithm from the algorithm list to generate mutated image.
                                     <div style={{display:'flex',marginTop:'15px'}}>
                                         <Select placeholder="mutation operators" style={{marginRight:'15px'}} onChange={(e)=>{this.props.changeGenerate(e)}}>
                                             <Option value="byte-change">byte-change</Option>
@@ -328,7 +328,7 @@ class MySider extends Component {
 
                 </div>
                 <Modal
-                    title="Precision setting(You can set the min and max precision you want to test)"
+                    title="Precision setting"
                     visible={this.state.visible}
                     onOk={()=>{this.setState({
                         // visible:false
@@ -336,8 +336,9 @@ class MySider extends Component {
                     onCancel={()=>{this.setState({
                         visible:false
                     })}}
-                    width={900}
+                    width={700}
                 >
+                    <div style={{marginBottom:'20px'}}>You can set the min and max precision you want to test.</div>
                     {/*<Slider range defaultValue={[8, 64]} tooltipVisible={true} />*/}
                     <div style={{display:'flex',justifyContent:'center'}}>
                         <div style={{flex:1,display:'flex',justifyContent:'center'}}>
