@@ -63,7 +63,7 @@ class HomePage extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{fontWeight:500}}>
                 <Layout style={{position: 'absolute', height: '100%', width: '100%'}}>
                     <Header style={{color: 'white', textAlign: 'center'}}>DeepStable</Header>
                     <Layout>

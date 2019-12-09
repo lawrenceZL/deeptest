@@ -5,7 +5,7 @@ import Tweakers from '../components/tweakers/tweakers'
 
 function App() {
     return (
-        <div style={{fontWeight:500}}>
+        <div>
             <Route exact path="/" component={HomePage}/>
             <Route exact path="/tweakers" component={Tweakers}/>
         </div>

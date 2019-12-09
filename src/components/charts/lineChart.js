@@ -19,7 +19,7 @@ class LineChart extends Component{
         let that = this;
         let option = {
             title: {
-                text: 'The sketch diagram of Crash sum',
+                text: 'The sketch diagram of Exception sum',
                 // subtext: 'data',
                 left: 'center'
             },
@@ -28,6 +28,9 @@ class LineChart extends Component{
                 name:'time',
                 axisLine:{
                     symbol:['none', 'arrow']
+                },
+                nameTextStyle:{
+                    fontWeight:500
                 }
                 // data: this.state.xData
             },
@@ -36,6 +39,9 @@ class LineChart extends Component{
                 name:'sum',
                 axisLine:{
                     symbol:['none', 'arrow']
+                },
+                nameTextStyle:{
+                    fontWeight:500
                 }
             },
             series: [{
@@ -67,7 +73,7 @@ class LineChart extends Component{
                         <span style="color:#ffd480">normal:${item[4]}</span></br>
                         <!--time:${item[5]}</br>-->
                     `
-                }
+                },
             },
             dataZoom: [
                 {

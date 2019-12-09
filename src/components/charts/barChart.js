@@ -9,20 +9,23 @@ class BarChart extends Component{
     render(){
         let option = {
             title: {
-                text: 'The plot diagram of Crash category',
+                text: 'The plot diagram of Exception category',
                 // subtext: 'data',
                 left: 'center'
             },
             tooltip : {
                 trigger: 'item',
-                formatter: "crash_style_type <br/>{b} : {c} ({d}%)"
+                formatter: "exception_style_type <br/>{b} : {c} ({d}%)"
             },
             legend: {
                 // orient: 'vertical',
                 // top: 'middle',
                 bottom: 0,
                 left: 'center',
-                data: ['non-numeric error', 'Target deep learning framework with numerical errors','Contrast deep learning framework with numerical errors','GPU / GPU numerical error','GPU / CPU numerical error',' CPU / GPU numerical error','CPU / CPU numerical error']
+                data: ['non-numeric error', 'Target deep learning framework with numerical errors','Contrast deep learning framework with numerical errors','GPU / GPU numerical error','GPU / CPU numerical error',' CPU / GPU numerical error','CPU / CPU numerical error'],
+                textStyle:{
+                    fontWeight:500
+                }
             },
             series : [
                 {
@@ -49,7 +52,8 @@ class BarChart extends Component{
                         normal:{
                             label:{
                                 show: true,
-                                formatter: '{c} ({d}%)'
+                                formatter: '{c} ({d}%)',
+                                fontWeight: 500
                             },
                             labelLine :{show:true}
                         }

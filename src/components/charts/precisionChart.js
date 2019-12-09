@@ -31,6 +31,9 @@ class PrecisionChart extends Component{
                 name:'precision',
                 axisLine:{
                     symbol:['none', 'arrow']
+                },
+                nameTextStyle:{
+                    fontWeight:500
                 }
             },
             grid: {
@@ -41,9 +44,12 @@ class PrecisionChart extends Component{
             },
             yAxis: {
                 type: 'value',
-                name:'crash',
+                name:'exception',
                 axisLine:{
                     symbol:['none', 'arrow']
+                },
+                nameTextStyle:{
+                    fontWeight:500
                 }
             },
             series: [{
@@ -64,7 +70,7 @@ class PrecisionChart extends Component{
                     console.log(params[0])
                     // console.log(item)
                     return `
-                       crashes:${params[0].data}</br>
+                       exception:${params[0].data}</br>
                        precision:${params[0].axisValue}
                     `
                 }

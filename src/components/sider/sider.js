@@ -95,7 +95,7 @@ class MySider extends Component {
                 }
                 setTimeout(()=>{
                     this.props.changeType(1)
-                },5000)
+                },3000)
                 this.props.storeLine(data,yData)
             }
         })
@@ -254,18 +254,21 @@ class MySider extends Component {
                                         message.success("upload successfully")
                                     }
                                 }}
-                                        // onPreview={(e)=>{
-                                        //     console.log(e)
-                                        //     let fileList = this.props.fileList;
-                                        //     for(let i=0;i<fileList.length;i++){
-                                        //         if(e.uid===fileList[i].uid){
-                                        //             fileList[i].status = "error"
-                                        //         }else {
-                                        //             fileList[i].status = "done"
-                                        //         }
-                                        //     }
-                                        //     this.props.changeFile(fileList)
-                                        // }}
+                                        onPreview={(e)=>{
+                                            console.log(e)
+                                            let fileList = this.props.fileList;
+                                            for(let i=0;i<fileList.length;i++){
+                                                if(e.uid===fileList[i].uid){
+                                                    fileList[i].status = "error"
+                                                }else {
+                                                    fileList[i].status = "done"
+                                                }
+                                            }
+                                            this.props.changeFile(fileList)
+                                            this.setState({
+
+                                            })
+                                        }}
                                 >
                                     <Button>
                                         <Icon type="upload"/> Upload
@@ -354,6 +357,7 @@ class MySider extends Component {
 
                 </div>
                 <Modal
+                    style={{fontWeight:500}}
                     title="Precision setting"
                     visible={this.state.visible}
                     onOk={()=>{this.setState({
@@ -377,11 +381,11 @@ class MySider extends Component {
                     <div style={{marginBottom:'20px'}}>You can set the min and max precision you want to test.</div>
                     {/*<Slider range defaultValue={[8, 64]} tooltipVisible={true} />*/}
                     <div style={{display:'flex',justifyContent:'center'}}>
-                        <div style={{flex:1,display:'flex',justifyContent:'center'}}>
-                            min-precision:&nbsp;<InputNumber min={1} max={50} defaultValue={8} />&nbsp;
+                        <div style={{flex:1,display:'flex',justifyContent:'center',alignItems:'center'}}>
+                            min:&nbsp;<InputNumber min={1} max={50} defaultValue={8} />&nbsp;
                         </div>
-                        <div style={{flex:1,display:'flex',justifyContent:'center'}}>
-                            max-precision:&nbsp;<InputNumber min={51} max={100} defaultValue={64} />
+                        <div style={{flex:1,display:'flex',justifyContent:'center',alignItems:'center'}}>
+                            max:&nbsp;<InputNumber min={51} max={100} defaultValue={64} />
                         </div>
                     </div>
                     {this.state.spin_show&&
