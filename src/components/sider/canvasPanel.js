@@ -1,7 +1,13 @@
 import React,{Component} from "react";
 import Draw from "../../utils/draw";
-import {Button,Result} from 'antd'
+import {Button,Result,message} from 'antd'
 import "./Canvas.css";
+
+message.config({
+    top: 100,
+    duration: 2,
+    maxCount: 3,
+});
 
 class CanvasPanel extends Component {
 
@@ -32,14 +38,15 @@ class CanvasPanel extends Component {
         }
         fileList.push(item)
         this.props.changeFile(fileList)
-        this.setState({
-            result_show:'show'
-        })
-        setTimeout(()=>{
-            this.setState({
-                result_show:'hidden'
-            })
-        },2000)
+        message.success("generate successfully")
+        // this.setState({
+        //     result_show:'show'
+        // })
+        // setTimeout(()=>{
+        //     this.setState({
+        //         result_show:'hidden'
+        //     })
+        // },2000)
         // this.refs['imgC'].src = exportImg;
     }
 
@@ -51,18 +58,18 @@ class CanvasPanel extends Component {
                     <span onClick={this.reset} style={{float:'left'}}><Button>cancel</Button></span>
                     <span onClick={this.exp.bind(this)} style={{float:'right'}}><Button type="primary">generate</Button></span>
                 </div>
-                <Result
-                    className={this.state.result_show}
-                    status="success"
-                    title="generate successfully"
-                    // subTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait."
-                    // extra={[
-                    //     <Button type="primary" key="console">
-                    //         Go Console
-                    //     </Button>,
-                    //     <Button key="buy">Buy Again</Button>,
-                    // ]}
-                />
+                {/*<Result*/}
+                    {/*className={this.state.result_show}*/}
+                    {/*status="success"*/}
+                    {/*title="generate successfully"*/}
+                    {/*// subTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait."*/}
+                    {/*// extra={[*/}
+                    {/*//     <Button type="primary" key="console">*/}
+                    {/*//         Go Console*/}
+                    {/*//     </Button>,*/}
+                    {/*//     <Button key="buy">Buy Again</Button>,*/}
+                    {/*// ]}*/}
+                {/*/>*/}
                 {/*<img ref="imgC" />*/}
             </div>
         );

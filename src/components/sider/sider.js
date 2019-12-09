@@ -1,5 +1,20 @@
 import React, {Component} from 'react';
-import {Button, Form, Input, Select, Upload, Icon, Menu, Empty, Slider, Modal,InputNumber,Popover} from 'antd';
+import {
+    Button,
+    Form,
+    Input,
+    Select,
+    Upload,
+    Icon,
+    Menu,
+    Empty,
+    Slider,
+    Modal,
+    InputNumber,
+    Popover,
+    message,
+    Spin
+} from 'antd';
 import {timeUtil} from "../../utils/timeUtil";
 import CanvasPanel from '../../containers/sider/canvasPanel'
 import './Canvas.css'
@@ -8,6 +23,12 @@ import PrecisionChart from "../charts/precisionChart";
 
 const {Option} = Select;
 
+message.config({
+    top: 100,
+    duration: 2,
+    maxCount: 3,
+});
+
 class MySider extends Component {
     constructor(props) {
         super(props);
@@ -15,7 +36,8 @@ class MySider extends Component {
             time: '',
             sampleTypeSelect: 'image',
             modelTypeSelect:'upload',
-            visible:false
+            visible:false,
+            spin_show:false
         }
         this.sampleTypeChange = this.sampleTypeChange.bind(this);
         this.imageSelect = this.imageSelect.bind(this);
@@ -24,15 +46,15 @@ class MySider extends Component {
     }
 
     componentDidMount() {
-        let time = timeUtil.formatTimeStampToDateTime(new Date());
-        this.setState({
-            time: time
-        })
-        setInterval(() => {
-            this.setState({
-                time: timeUtil.formatTimeStampToDateTime(new Date())
-            })
-        }, 1000)
+        // let time = timeUtil.formatTimeStampToDateTime(new Date());
+        // this.setState({
+        //     time: time
+        // })
+        // setInterval(() => {
+        //     this.setState({
+        //         time: timeUtil.formatTimeStampToDateTime(new Date())
+        //     })
+        // }, 1000)
 
     }
 
@@ -175,7 +197,7 @@ class MySider extends Component {
                 <div style={{padding: '60px 20px 20px 20px'}}>
                     <Form>
                         <Form.Item
-                            label="framework"
+                            label="Framework"
                         >
                             Select different frameworks from the list to run the operators.
                             <Popover content='We currently only provided the three generally used frameworks' title="Framework Select">
@@ -187,7 +209,7 @@ class MySider extends Component {
                             </Popover>
                         </Form.Item>
                         <Form.Item
-                            label="operator"
+                            label="Operator"
                         >
                             Select operators should be test from the list to run the input.
                             <Select placeholder="operator" onChange={(e)=>{this.props.changeOperator(e)}}>
@@ -211,15 +233,15 @@ class MySider extends Component {
                         </Form.Item>
                         }
                         <Form.Item
-                            label="sample"
+                            label="Sample"
                         >
                             <Menu mode="horizontal" selectedKeys={[this.state.modelTypeSelect]}
                                   onClick={this.modelTypeChange}>
                                 <Menu.Item key="upload">
-                                    image
+                                    Image
                                 </Menu.Item>
                                 <Menu.Item key="sketchpad">
-                                    sketchpad
+                                    Sketchpad
                                 </Menu.Item>
                             </Menu>
                             {this.state.modelTypeSelect === "upload" &&
@@ -228,19 +250,22 @@ class MySider extends Component {
                                 <Upload {...props2} onChange={(e)=>{
                                     console.log(e)
                                     this.props.changeFile(e.fileList)
+                                    if(e.file.status==="done"){
+                                        message.success("upload successfully")
+                                    }
                                 }}
-                                        onPreview={(e)=>{
-                                            console.log(e)
-                                            let fileList = this.props.fileList;
-                                            for(let i=0;i<fileList.length;i++){
-                                                if(e.uid===fileList[i].uid){
-                                                    fileList[i].status = "error"
-                                                }else {
-                                                    fileList[i].status = "done"
-                                                }
-                                            }
-                                            this.props.changeFile(fileList)
-                                        }}
+                                        // onPreview={(e)=>{
+                                        //     console.log(e)
+                                        //     let fileList = this.props.fileList;
+                                        //     for(let i=0;i<fileList.length;i++){
+                                        //         if(e.uid===fileList[i].uid){
+                                        //             fileList[i].status = "error"
+                                        //         }else {
+                                        //             fileList[i].status = "done"
+                                        //         }
+                                        //     }
+                                        //     this.props.changeFile(fileList)
+                                        // }}
                                 >
                                     <Button>
                                         <Icon type="upload"/> Upload
@@ -282,6 +307,7 @@ class MySider extends Component {
                                                 }
                                                 fileList.push(item)
                                                 this.props.changeFile(fileList)
+                                                message.success("generate successfully")
                                             }
                                         }}>generate</Button>
                                     </div>
@@ -331,8 +357,18 @@ class MySider extends Component {
                     title="Precision setting"
                     visible={this.state.visible}
                     onOk={()=>{this.setState({
-                        // visible:false
-                    });this.props.showPrecision(true)}}
+                        // visible:false,
+                        spin_show:true
+                    });
+                        this.props.showPrecision(false);
+                    setTimeout(()=>{
+                        this.props.showPrecision(true);
+                        this.setState({
+                            spin_show:false
+                        })
+                    },5000)
+
+                    }}
                     onCancel={()=>{this.setState({
                         visible:false
                     })}}
@@ -348,7 +384,13 @@ class MySider extends Component {
                             max-precision:&nbsp;<InputNumber min={51} max={100} defaultValue={64} />
                         </div>
                     </div>
+                    {this.state.spin_show&&
+                        <div style={{display:'flex',flex:'1',justifyContent:'center'}}>
+                            <Spin tip="Loading..." style={{marginTop: 20}} size="large">
 
+                            </Spin>
+                        </div>
+                    }
                     {this.props.precision_show&&
                     <div style={{flex: 1}}>
                         <PrecisionChart/>

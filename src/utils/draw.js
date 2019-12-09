@@ -48,12 +48,12 @@ function draw(){
 function create() {
     // 以下是创建画布背景
     context.rect(0, 0, canvasWidth, canvasHeight);
-    context.fillStyle="#f2f2f2"; // 图片北京色是灰色，此处去除会变黑色
+    // context.fillStyle="#f2f2f2"; // 图片北京色是灰色，此处去除会变黑色
     context.fill();
     // 设置画笔属性
-    context.strokeStyle = "#666";
+    context.strokeStyle = "#fff";
     context.lineJoin = "round";
-    context.lineWidth = 2;
+    context.lineWidth = 8;
     // 默认值清理
     clickX = new Array();
     clickY = new Array();

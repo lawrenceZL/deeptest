@@ -27,10 +27,24 @@ class PrecisionChart extends Component{
                 data: x,
                 min: function(value) {
                     return value.min - 20;
+                },
+                name:'precision',
+                axisLine:{
+                    symbol:['none', 'arrow']
                 }
             },
+            grid: {
+                // x:100,      //坐标轴左边与边框的距离
+                // top: 80,      //坐标轴顶端与边框的距离
+                x2: 80,     //坐标轴右边与边框的距离
+                // y2:100,     //坐标轴底端与边框的距离
+            },
             yAxis: {
-                type: 'value'
+                type: 'value',
+                name:'crash',
+                axisLine:{
+                    symbol:['none', 'arrow']
+                }
             },
             series: [{
                 data: y,
