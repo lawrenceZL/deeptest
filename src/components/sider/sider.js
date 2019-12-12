@@ -95,7 +95,7 @@ class MySider extends Component {
                 }
                 setTimeout(()=>{
                     this.props.changeType(1)
-                },3000)
+                },1000)
                 this.props.storeLine(data,yData)
             }
         })
@@ -310,6 +310,9 @@ class MySider extends Component {
                                                 }
                                                 fileList.push(item)
                                                 this.props.changeFile(fileList)
+                                                this.setState({
+
+                                                })
                                                 message.success("generate successfully")
                                             }
                                         }}>generate</Button>
@@ -370,10 +373,12 @@ class MySider extends Component {
                         this.setState({
                             spin_show:false
                         })
-                    },5000)
+                    },3000)
 
                     }}
-                    onCancel={()=>{this.setState({
+                    onCancel={()=>{
+                        this.props.showPrecision(false);
+                        this.setState({
                         visible:false
                     })}}
                     width={700}

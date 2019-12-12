@@ -22,7 +22,7 @@ class BarChart extends Component{
                 // top: 'middle',
                 bottom: 0,
                 left: 'center',
-                data: ['non-numeric error', 'Target deep learning framework with numerical errors','Contrast deep learning framework with numerical errors','GPU / GPU numerical error','GPU / CPU numerical error',' CPU / GPU numerical error','CPU / CPU numerical error'],
+                data: ['non-numeric exception', 'Target deep learning framework with numerical exception','Contrast deep learning framework with numerical exception','GPU / GPU numerical exception','GPU / CPU numerical exception',' CPU / GPU numerical exception','CPU / CPU numerical exception'],
                 textStyle:{
                     fontWeight:500
                 }
@@ -34,13 +34,13 @@ class BarChart extends Component{
                     center: ['50%', '50%'],
                     selectedMode: 'single',
                     data:[
-                        {value:2304, name: 'non-numeric error'},
-                        {value:265, name: 'Target deep learning framework with numerical errors'},
-                        {value:77, name: 'Contrast deep learning framework with numerical errors'},
-                        {value:154, name: 'GPU / GPU numerical error'},
-                        {value:348, name: 'GPU / CPU numerical error'},
-                        {value:114, name: ' CPU / GPU numerical error'},
-                        {value:502, name: 'CPU / CPU numerical error'},
+                        {value:2304, name: 'non-numeric exception'},
+                        {value:265, name: 'Target deep learning framework with numerical exception'},
+                        {value:77, name: 'Contrast deep learning framework with numerical exception'},
+                        {value:154, name: 'GPU / GPU numerical exception'},
+                        {value:348, name: 'GPU / CPU numerical exception'},
+                        {value:114, name: ' CPU / GPU numerical exception'},
+                        {value:502, name: 'CPU / CPU numerical exception'},
                         // {value:78, name: 'crash_style_8'},
                     ],
                     itemStyle: {
