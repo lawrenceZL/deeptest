@@ -22,7 +22,7 @@ function mapDispatchToProps(dispatch){
         changeFramwork:(framwork)=>dispatch(changeFramwork(framwork)),
         changeOperator:(operator)=>dispatch(changeOperator(operator)),
         changeGenerate:(generate)=>dispatch(changeGenerate(generate)),
-        storeLine:(lineData,lineDataY)=>dispatch(storeLine(lineData,lineDataY)),
+        storeLine:(lineData,lineDataY,lineDataY2)=>dispatch(storeLine(lineData,lineDataY,lineDataY2)),
         changeType:(index)=>dispatch(changeType(index)),
         changeFile:(fileList)=>dispatch(changeFile(fileList)),
         showPrecision:(precision_show)=>dispatch(showPrecision(precision_show))

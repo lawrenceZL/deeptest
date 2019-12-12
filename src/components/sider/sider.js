@@ -86,17 +86,22 @@ class MySider extends Component {
                 let data = response.data.data;
                 // let xData=[];
                 let yData=[];
+                let yData2 = [];
                 for(let i=1;i<500;i++){
                     // xData.push(timeUtil.formatTimeStampToHourSecondTime(data[i][5]))
                     let arr = []
+                    let arr2 = []
                     arr.push(new Date(data[i][5]))
+                    arr2.push(new Date(data[i][5]))
                     arr.push(i)
+                    arr2.push(i/2+2*Math.random())
                     yData.push(arr)
+                    yData2.push(arr2)
                 }
                 setTimeout(()=>{
                     this.props.changeType(1)
                 },1000)
-                this.props.storeLine(data,yData)
+                this.props.storeLine(data,yData,yData2)
             }
         })
     }
@@ -197,18 +202,6 @@ class MySider extends Component {
                 <div style={{padding: '60px 20px 20px 20px'}}>
                     <Form>
                         <Form.Item
-                            label="Framework"
-                        >
-                            Select different frameworks from the list to run the operators.
-                            <Popover content='We currently only provided the three generally used frameworks' title="Framework Select">
-                                <Select placeholder="framework" mode="multiple" defaultValue={this.props.framwork} onChange={(e)=>{this.props.changeFramwork(e)}}>
-                                    <Option value="tensorflow">tensorflow</Option>
-                                    <Option value="pytorch">pytorch</Option>
-                                    <Option value="caffe">caffe</Option>
-                                </Select>
-                            </Popover>
-                        </Form.Item>
-                        <Form.Item
                             label="Operator"
                         >
                             Select operators should be test from the list to run the input.
@@ -222,16 +215,28 @@ class MySider extends Component {
                                 <Option value="tanh">tanh</Option>
                             </Select>
                         </Form.Item>
-                        {this.props.index!==-1&&this.props.index!==0&&
-                        <Form.Item>
-                            Complete precision testing with selected framework and operator. Click to set precision range.<br/>
-                            <Button  style={{marginTop:'10px',marginBottom:'10px'}} onClick={()=>{
-                                this.setState({
-                                    visible:true
-                                })
-                            }}>precision testing</Button>
+                        <Form.Item
+                            label="Framework"
+                        >
+                            Select different frameworks from the list to run the operators.
+                            <Popover content='We currently only provided the three generally used frameworks' title="Framework Select">
+                                <Select placeholder="framework" mode="multiple" defaultValue={this.props.framwork} onChange={(e)=>{this.props.changeFramwork(e)}}>
+                                    <Option value="tensorflow">tensorflow</Option>
+                                    <Option value="pytorch">pytorch</Option>
+                                    <Option value="caffe">caffe</Option>
+                                </Select>
+                            </Popover>
                         </Form.Item>
-                        }
+                        {/*{this.props.index!==-1&&this.props.index!==0&&*/}
+                        {/*<Form.Item>*/}
+                            {/*Complete precision testing with selected framework and operator. Click to set precision range.<br/>*/}
+                            {/*<Button  style={{marginTop:'10px',marginBottom:'10px'}} onClick={()=>{*/}
+                                {/*this.setState({*/}
+                                    {/*visible:true*/}
+                                {/*})*/}
+                            {/*}}>precision testing</Button>*/}
+                        {/*</Form.Item>*/}
+                        {/*}*/}
                         <Form.Item
                             label="Sample"
                         >
@@ -284,40 +289,55 @@ class MySider extends Component {
                         </Form.Item>
                         {this.state.modelTypeSelect!=="sketchpad"&&
                             <div>
-                                <Form.Item>
-                                    You can select an image from the sample list and choose an adversarial attack algorithm from the algorithm list to generate mutated image.
-                                    <div style={{display:'flex',marginTop:'15px'}}>
-                                        <Select placeholder="mutation operators" style={{marginRight:'15px'}} onChange={(e)=>{this.props.changeGenerate(e)}}>
-                                            <Option value="byte-change">byte-change</Option>
-                                            <Option value="bit-change">bit-change</Option>
-                                            <Option value="white-noise">white-noise</Option>
-                                            <Option value="scale">scale</Option>
-                                            <Option value="precision">precision</Option>
-                                            <Option value="triangular-matrix">triangular-matrix</Option>
-                                            <Option value="kernel_matrix">kernel_matrix</Option>
+                                <Form.Item
+                                    label="Precision"
+                                >
+                                    {/*Select different frameworks from the list to run the operators.*/}
+                                    {/*<Popover content='We currently only provided the three generally used frameworks' title="Framework Select">*/}
+                                        <Select placeholder="precision" mode="multiple">
+                                            <Option value="CPU-16">CPU-16</Option>
+                                            <Option value="GPU-16">GPU-16</Option>
+                                            <Option value="CPU-32">CPU-32</Option>
+                                            <Option value="GPU-32">GPU-32</Option>
+                                            <Option value="CPU-64">CPU-64</Option>
+                                            <Option value="GPU-64">GPU-64</Option>
                                         </Select>
-                                        <Button onClick={()=>{
-                                            let fileList = this.props.fileList;
-                                            if(fileList.length>0){
-                                                let item = {}
-                                                for(let i=0;i<fileList.length;i++){
-                                                    if(fileList[i].status==="error"){
-                                                        item = JSON.parse(JSON.stringify(fileList[i]))
-                                                        item.uid = "generate_"+fileList[i].uid
-                                                        item.name = "generate_"+fileList[i].name
-                                                        item.status = "done"
-                                                    }
-                                                }
-                                                fileList.push(item)
-                                                this.props.changeFile(fileList)
-                                                this.setState({
-
-                                                })
-                                                message.success("generate successfully")
-                                            }
-                                        }}>generate</Button>
-                                    </div>
+                                    {/*</Popover>*/}
                                 </Form.Item>
+                                {/*<Form.Item>*/}
+                                    {/*You can select an image from the sample list and choose an adversarial attack algorithm from the algorithm list to generate mutated image.*/}
+                                    {/*<div style={{display:'flex',marginTop:'15px'}}>*/}
+                                        {/*<Select placeholder="mutation operators" style={{marginRight:'15px'}} onChange={(e)=>{this.props.changeGenerate(e)}}>*/}
+                                            {/*<Option value="byte-change">byte-change</Option>*/}
+                                            {/*<Option value="bit-change">bit-change</Option>*/}
+                                            {/*<Option value="white-noise">white-noise</Option>*/}
+                                            {/*<Option value="scale">scale</Option>*/}
+                                            {/*<Option value="precision">precision</Option>*/}
+                                            {/*<Option value="triangular-matrix">triangular-matrix</Option>*/}
+                                            {/*<Option value="kernel_matrix">kernel_matrix</Option>*/}
+                                        {/*</Select>*/}
+                                        {/*<Button onClick={()=>{*/}
+                                            {/*let fileList = this.props.fileList;*/}
+                                            {/*if(fileList.length>0){*/}
+                                                {/*let item = {}*/}
+                                                {/*for(let i=0;i<fileList.length;i++){*/}
+                                                    {/*if(fileList[i].status==="error"){*/}
+                                                        {/*item = JSON.parse(JSON.stringify(fileList[i]))*/}
+                                                        {/*item.uid = "generate_"+fileList[i].uid*/}
+                                                        {/*item.name = "generate_"+fileList[i].name*/}
+                                                        {/*item.status = "done"*/}
+                                                    {/*}*/}
+                                                {/*}*/}
+                                                {/*fileList.push(item)*/}
+                                                {/*this.props.changeFile(fileList)*/}
+                                                {/*this.setState({*/}
+
+                                                {/*})*/}
+                                                {/*message.success("generate successfully")*/}
+                                            {/*}*/}
+                                        {/*}}>generate</Button>*/}
+                                    {/*</div>*/}
+                                {/*</Form.Item>*/}
                                 {/*<Form.Item*/}
                                     {/*label="Samples"*/}
                                 {/*>*/}

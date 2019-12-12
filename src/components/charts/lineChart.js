@@ -15,13 +15,18 @@ class LineChart extends Component{
 
 
     render(){
-        // console.log(this.state.yData)
+        console.log(this.props)
         let that = this;
         let option = {
             title: {
-                text: 'The sketch diagram of Exception sum',
+                text: 'The sketch diagram of Exception',
                 // subtext: 'data',
                 left: 'center'
+            },
+            legend:{
+                show:true,
+                data:['name1','name2'],
+                top:30,
             },
             xAxis: {
                 type: 'time',
@@ -31,12 +36,12 @@ class LineChart extends Component{
                 },
                 nameTextStyle:{
                     fontWeight:500
-                }
-                // data: this.state.xData
+                },
+                // data: this.props.lineData
             },
             yAxis: {
                 type: 'value',
-                name:'sum',
+                name:'exception',
                 axisLine:{
                     symbol:['none', 'arrow']
                 },
@@ -45,7 +50,19 @@ class LineChart extends Component{
                 }
             },
             series: [{
+                name:'name1',
                 data: this.props.lineDataY,
+                type: 'line',
+                animation:true,
+                animationThreshold:4000,
+                animationEasing:'linear',
+                animationDuration: function (idx) {
+                    // 越往后的数据延迟越大
+                    return idx * 10000;
+                }
+            },{
+                name:'name2',
+                data: this.props.lineDataY2,
                 type: 'line',
                 animation:true,
                 animationThreshold:4000,

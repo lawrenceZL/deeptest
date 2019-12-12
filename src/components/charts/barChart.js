@@ -22,7 +22,7 @@ class BarChart extends Component{
                 // top: 'middle',
                 bottom: 0,
                 left: 'center',
-                data: ['non-numeric exception', 'Target deep learning framework with numerical exception','Contrast deep learning framework with numerical exception','GPU / GPU numerical exception','GPU / CPU numerical exception',' CPU / GPU numerical exception','CPU / CPU numerical exception'],
+                data: ['CPU-16', 'GPU-16','CPU-32','GPU-32','CPU-64','GPU-64'],
                 textStyle:{
                     fontWeight:500
                 }
@@ -34,14 +34,12 @@ class BarChart extends Component{
                     center: ['50%', '50%'],
                     selectedMode: 'single',
                     data:[
-                        {value:2304, name: 'non-numeric exception'},
-                        {value:265, name: 'Target deep learning framework with numerical exception'},
-                        {value:77, name: 'Contrast deep learning framework with numerical exception'},
-                        {value:154, name: 'GPU / GPU numerical exception'},
-                        {value:348, name: 'GPU / CPU numerical exception'},
-                        {value:114, name: ' CPU / GPU numerical exception'},
-                        {value:502, name: 'CPU / CPU numerical exception'},
-                        // {value:78, name: 'crash_style_8'},
+                        {value:304, name: 'CPU-16'},
+                        {value:225, name: 'GPU-16'},
+                        {value:77, name: 'CPU-32'},
+                        {value:154, name: 'GPU-32'},
+                        {value:248, name: 'CPU-64'},
+                        {value:114, name: 'GPU-64'},
                     ],
                     itemStyle: {
                         emphasis: {

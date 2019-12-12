@@ -9,6 +9,7 @@ function mapStateToProps(state) {
     return {
         lineData:state.deeptest_reducer.lineData,
         lineDataY:state.deeptest_reducer.lineDataY,
+        lineDataY2:state.deeptest_reducer.lineDataY2,
     }
 }
 

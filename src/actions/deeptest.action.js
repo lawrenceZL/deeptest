@@ -33,11 +33,12 @@ export function clickRun() {
     }
 }
 
-export function storeLine(lineData,lineDataY) {
+export function storeLine(lineData,lineDataY,lineDataY2) {
     return {
         type:STORE_LINEDATA,
         lineData:lineData,
         lineDataY:lineDataY,
+        lineDataY2:lineDataY2,
     }
 }
 export function changeType(index) {

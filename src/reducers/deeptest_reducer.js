@@ -15,6 +15,7 @@ const initialState={
     generate:'',
     lineData:[],
     lineYData:[],
+    lineYData2:[],
     precision_show: false,
     fileList:[
         {
@@ -85,6 +86,7 @@ const deeptest_reducer = (state = initialState , action )=>{
             return Object.assign({},state,{
                 lineData:action.lineData,
                 lineDataY:action.lineDataY,
+                lineDataY2:action.lineDataY2,
             })
         }
         case TYPE_CHANGE:{
