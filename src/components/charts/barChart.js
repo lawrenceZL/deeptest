@@ -9,20 +9,20 @@ class BarChart extends Component{
     render(){
         let option = {
             title: {
-                text: 'The plot diagram of Exception category',
+                text: 'The plot diagram of Discrepancy category',
                 // subtext: 'data',
                 left: 'center'
             },
             tooltip : {
                 trigger: 'item',
-                formatter: "exception_style_type <br/>{b} : {c} ({d}%)"
+                formatter: "discrepancy_style <br/>{b} : {c} ({d}%)"
             },
             legend: {
                 // orient: 'vertical',
                 // top: 'middle',
                 bottom: 0,
                 left: 'center',
-                data: ['CPU-16', 'GPU-16','CPU-32','GPU-32','CPU-64','GPU-64'],
+                data: ['Boundary perturbation', 'Significant bit perturbation','Special value perturbation','mutate_erase_bytes','mutate_insert_bytes'],
                 textStyle:{
                     fontWeight:500
                 }
@@ -34,12 +34,11 @@ class BarChart extends Component{
                     center: ['50%', '50%'],
                     selectedMode: 'single',
                     data:[
-                        {value:304, name: 'CPU-16'},
-                        {value:225, name: 'GPU-16'},
-                        {value:77, name: 'CPU-32'},
-                        {value:154, name: 'GPU-32'},
-                        {value:248, name: 'CPU-64'},
-                        {value:114, name: 'GPU-64'},
+                        {value:304, name: 'Boundary perturbation'},
+                        {value:225, name: 'Significant bit perturbation'},
+                        {value:77, name: 'Special value perturbation'},
+                        {value:154, name: 'mutate_erase_bytes'},
+                        {value:248, name: 'mutate_insert_bytes'},
                     ],
                     itemStyle: {
                         emphasis: {

@@ -19,13 +19,13 @@ class LineChart extends Component{
         let that = this;
         let option = {
             title: {
-                text: 'The sketch diagram of Discrepancy',
+                // text: 'The sketch diagram of Discrepancy',
                 // subtext: 'data',
                 left: 'center'
             },
             legend:{
                 show:true,
-                data:['Precision-related mutation','Origin mutation'],
+                data:['Precision-related mutation'],
                 top:30,
             },
             xAxis: {
@@ -51,17 +51,6 @@ class LineChart extends Component{
             },
             series: [{
                 name:'Precision-related mutation',
-                data: this.props.lineDataY,
-                type: 'line',
-                animation:true,
-                animationThreshold:4000,
-                animationEasing:'linear',
-                animationDuration: function (idx) {
-                    // 越往后的数据延迟越大
-                    return idx * 10000;
-                }
-            },{
-                name:'Origin mutation',
                 data: this.props.lineDataY2,
                 type: 'line',
                 animation:true,
@@ -73,7 +62,7 @@ class LineChart extends Component{
                 }
             }],
             tooltip : {
-                trigger: 'item',
+                trigger: 'axis',
                 axisPointer: {
                     type: 'cross',
                     label: {
@@ -82,21 +71,14 @@ class LineChart extends Component{
                 },
                 showContent:true,
                 formatter: function (params) {
-                    console.log(params)
-                    let item
-                    if(params.seriesName==="Origin mutation"){
-                        item = that.props.lineData2[3*params.data[1]]
-                    }else {
-                        item = that.props.lineData[params.data[1]]
-                    }
-                    if(item!=undefined){
-                        return `
+                    let item = that.props.lineData[params[0].data[1]]
+                    // console.log(item)
+                    return `
                         <span style="color:#ff8080">max:${item[2]}</span></br>
                         <span style="color:#99bbff">mean:${item[3]}</span></br>
                         <span style="color:#ffd480">normal:${item[4]}</span></br>
                         <!--time:${item[5]}</br>-->
                     `
-                    }
                 },
             },
             dataZoom: [
@@ -118,7 +100,7 @@ class LineChart extends Component{
 
         return(
             <div>
-                <ReactEcharts style={{height:'550px'}} option={option}/>
+                <ReactEcharts style={{height:'350px'}} option={option}/>
                 <div style={{display:'flex',justifyContent:'center'}}>
                     <div style={{flex:1,display:'flex',justifyContent:'flex-end',height:20}}>
                         <div style={{width:22,height:15,background:'#ff8080',borderRadius:'4px'}}>

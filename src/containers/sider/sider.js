@@ -13,6 +13,8 @@ function mapStateToProps(state) {
         fileList:state.deeptest_reducer.fileList,
         index:state.deeptest_reducer.index,
         precision_show:state.deeptest_reducer.precision_show,
+        lineDataY:state.deeptest_reducer.lineDataY,
+        lineDataY2:state.deeptest_reducer.lineDataY2,
     }
 }
 
@@ -22,7 +24,7 @@ function mapDispatchToProps(dispatch){
         changeFramwork:(framwork)=>dispatch(changeFramwork(framwork)),
         changeOperator:(operator)=>dispatch(changeOperator(operator)),
         changeGenerate:(generate)=>dispatch(changeGenerate(generate)),
-        storeLine:(lineData,lineDataY,lineDataY2)=>dispatch(storeLine(lineData,lineDataY,lineDataY2)),
+        storeLine:(lineData,lineData2,lineDataY,lineDataY2)=>dispatch(storeLine(lineData,lineData2,lineDataY,lineDataY2)),
         changeType:(index)=>dispatch(changeType(index)),
         changeFile:(fileList)=>dispatch(changeFile(fileList)),
         showPrecision:(precision_show)=>dispatch(showPrecision(precision_show))

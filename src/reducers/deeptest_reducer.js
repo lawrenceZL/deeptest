@@ -14,6 +14,7 @@ const initialState={
     operator:'',
     generate:'',
     lineData:[],
+    lineData2:[],
     lineYData:[],
     lineYData2:[],
     precision_show: false,
@@ -85,6 +86,7 @@ const deeptest_reducer = (state = initialState , action )=>{
         case STORE_LINEDATA:{
             return Object.assign({},state,{
                 lineData:action.lineData,
+                lineData2:action.lineData2,
                 lineDataY:action.lineDataY,
                 lineDataY2:action.lineDataY2,
             })

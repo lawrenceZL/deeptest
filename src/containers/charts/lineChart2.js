@@ -1,5 +1,5 @@
 import connect from "react-redux/es/connect/connect";
-import LineChart from '../../components/charts/lineChart';
+import LineChart2 from '../../components/charts/lineChart2';
 import {
     storeLine
 } from "../../actions/deeptest.action";
@@ -8,7 +8,6 @@ import {
 function mapStateToProps(state) {
     return {
         lineData:state.deeptest_reducer.lineData,
-        lineData2:state.deeptest_reducer.lineData2,
         lineDataY:state.deeptest_reducer.lineDataY,
         lineDataY2:state.deeptest_reducer.lineDataY2,
     }
@@ -21,4 +20,4 @@ function mapDispatchToProps(dispatch){
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LineChart);
+export default connect(mapStateToProps, mapDispatchToProps)(LineChart2);

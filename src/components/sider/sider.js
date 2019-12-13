@@ -80,30 +80,45 @@ class MySider extends Component {
     }
 
     getLineData(){
-        csvservice.getData('','','','').then(response=>{
+        csvservice.getData('','','','','1').then(response=>{
             if(response.responseCode==="RESPONSE_OK"){
                 console.log(response.data.data)
-                let data = response.data.data;
-                // let xData=[];
+                let data1 = response.data.data;
                 let yData=[];
-                let yData2 = [];
-                for(let i=1;i<500;i++){
+                let time_0 = new Date(data1[1][5]);
+                for(let i=1;i<1000;i++){
                     // xData.push(timeUtil.formatTimeStampToHourSecondTime(data[i][5]))
                     let arr = []
-                    let arr2 = []
-                    arr.push(new Date(data[i][5]))
-                    arr2.push(new Date(data[i][5]))
-                    arr.push(i)
-                    arr2.push(i/2+2*Math.random())
+                    arr.push(new Date(data1[i][5]).getTime())
+                    arr.push(i/3)
                     yData.push(arr)
-                    yData2.push(arr2)
+                    data1[i][5] = new Date(data1[1][5]).getTime()
                 }
-                setTimeout(()=>{
-                    this.props.changeType(1)
-                },1000)
-                this.props.storeLine(data,yData,yData2)
+                console.log(data1)
+                csvservice.getData('','','','','2').then(response=>{
+                    if(response.responseCode==="RESPONSE_OK"){
+                        console.log(response.data.data)
+                        let data2 = response.data.data;
+                        let yData2 = [];
+                        let time_br = new Date(data2[1][5])-time_0;
+                        console.log(time_br)
+                        for(let i=1;i<200;i++){
+                            // xData.push(timeUtil.formatTimeStampToHourSecondTime(data[i][5]))
+                            let arr2 = []
+                            arr2.push(new Date(data2[i][5])-time_br)
+                            arr2.push(i)
+                            yData2.push(arr2)
+                            data2[i][5] = new Date(data2[i][5])-time_br;
+                        }
+                        console.log(data2)
+                        this.props.changeType(1)
+                        this.props.storeLine(data1,data2,yData,yData2)
+                    }
+                })
             }
         })
+
+
     }
 
     render() {
@@ -216,6 +231,21 @@ class MySider extends Component {
                             </Select>
                         </Form.Item>
                         <Form.Item
+                            label="Platform"
+                        >
+                            {/*Select different frameworks from the list to run the operators.*/}
+                            {/*<Popover content='We currently only provided the three generally used frameworks' title="Framework Select">*/}
+                            <Select placeholder="platform">
+                                <Option value="CPU-16">CPU-16</Option>
+                                <Option value="GPU-16">GPU-16</Option>
+                                <Option value="CPU-32">CPU-32</Option>
+                                <Option value="GPU-32">GPU-32</Option>
+                                <Option value="CPU-64">CPU-64</Option>
+                                <Option value="GPU-64">GPU-64</Option>
+                            </Select>
+                            {/*</Popover>*/}
+                        </Form.Item>
+                        <Form.Item
                             label="Framework"
                         >
                             Select different frameworks from the list to run the operators.
@@ -289,21 +319,7 @@ class MySider extends Component {
                         </Form.Item>
                         {this.state.modelTypeSelect!=="sketchpad"&&
                             <div>
-                                <Form.Item
-                                    label="Precision"
-                                >
-                                    {/*Select different frameworks from the list to run the operators.*/}
-                                    {/*<Popover content='We currently only provided the three generally used frameworks' title="Framework Select">*/}
-                                        <Select placeholder="precision" mode="multiple">
-                                            <Option value="CPU-16">CPU-16</Option>
-                                            <Option value="GPU-16">GPU-16</Option>
-                                            <Option value="CPU-32">CPU-32</Option>
-                                            <Option value="GPU-32">GPU-32</Option>
-                                            <Option value="CPU-64">CPU-64</Option>
-                                            <Option value="GPU-64">GPU-64</Option>
-                                        </Select>
-                                    {/*</Popover>*/}
-                                </Form.Item>
+
                                 {/*<Form.Item>*/}
                                     {/*You can select an image from the sample list and choose an adversarial attack algorithm from the algorithm list to generate mutated image.*/}
                                     {/*<div style={{display:'flex',marginTop:'15px'}}>*/}

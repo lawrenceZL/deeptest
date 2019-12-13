@@ -3,6 +3,7 @@ import {withRouter} from 'react-router-dom'
 import {Layout, Empty, Spin, Alert, Radio,Modal,Slider} from 'antd';
 import MySider from '../../containers/sider/sider'
 import LineChart from '../../containers/charts/lineChart'
+import LineChart2 from '../../containers/charts/lineChart2'
 import BarChart from '../charts/barChart'
 import PrecisionChart from '../charts/precisionChart'
 import {csvservice} from "../../service/csv_service";
@@ -103,6 +104,7 @@ class HomePage extends Component {
                                 <div style={{display:'flex',justifyContent:'center',alignItem:'center'}}>
                                     <div style={{flex: 1,width:'800px'}}>
                                         <LineChart/>
+                                        {/*<LineChart2/>*/}
                                     </div>
                                     <div style={{flex: 1,width:'300px'}}>
                                         <BarChart/>
